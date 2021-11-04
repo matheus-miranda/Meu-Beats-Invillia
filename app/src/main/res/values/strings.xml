@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Meu Beats</string>
+    <string name="especializados_em_fones_para_deejay">Especializados em fones para deejay</string>
+    <string name="user">Usuário</string>
+    <string name="password">Senha</string>
+    <string name="login">Entrar</string>
+    <string name="not_registered">Ainda não é cadastrado?</string>
+    <string name="register"><u>Inscreva-se</u></string>
 </resources>

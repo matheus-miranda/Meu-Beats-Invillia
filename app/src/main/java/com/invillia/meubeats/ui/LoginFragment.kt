@@ -9,7 +9,7 @@ import com.invillia.meubeats.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: com.invillia.meubeats.databinding.FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,6 +18,7 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
 
+        binding.tilUser.isHelperTextEnabled = false
 
         return binding.root
     }
