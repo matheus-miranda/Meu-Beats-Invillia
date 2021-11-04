@@ -9,7 +9,7 @@ import com.invillia.meubeats.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
-    private var _binding: com.invillia.meubeats.databinding.FragmentLoginBinding? = null
+    private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(

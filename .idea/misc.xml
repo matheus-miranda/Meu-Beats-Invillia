@@ -4,12 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/button_corner.xml" value="0.36574074074074076" />
+        <entry key="app/src/main/res/drawable/button_selector.xml" value="0.36574074074074076" />
         <entry key="app/src/main/res/drawable/login_bg_gradient.xml" value="0.36574074074074076" />
         <entry key="app/src/main/res/drawable/login_button_selector.xml" value="0.36574074074074076" />
         <entry key="app/src/main/res/drawable/login_text_input_box.xml" value="0.36574074074074076" />
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.36574074074074076" />
         <entry key="app/src/main/res/drawable/rounded_button_focused.xml" value="0.36574074074074076" />
+        <entry key="app/src/main/res/drawable/rounded_button_normal.xml" value="0.36574074074074076" />
         <entry key="app/src/main/res/drawable/rounded_button_pressed.xml" value="0.36574074074074076" />
+        <entry key="app/src/main/res/drawable/rounded_button_selector.xml" value="0.36574074074074076" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.36574074074074076" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.37182971014492755" />
