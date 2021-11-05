@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.invillia.meubeats.ui.LoginFragment"
+        android:name="com.invillia.meubeats.presentation.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.invillia.meubeats.ui.ProductListFragment"
+        android:name="com.invillia.meubeats.presentation.ui.ProductListFragment"
         android:label="fragment_product_list"
         tools:layout="@layout/fragment_product_list" />
 </navigation>

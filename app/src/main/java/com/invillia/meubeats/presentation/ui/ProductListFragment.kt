@@ -1,4 +1,4 @@
-package com.invillia.meubeats.ui
+package com.invillia.meubeats.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
