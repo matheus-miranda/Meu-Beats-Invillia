@@ -6,4 +6,5 @@
     <string name="login">Entrar</string>
     <string name="not_registered">Ainda não é cadastrado?</string>
     <string name="register"><u>Inscreva-se</u></string>
+    <string name="login_bg_img_description">Foto de fundo. Mulher com phone de ouvido</string>
 </resources>

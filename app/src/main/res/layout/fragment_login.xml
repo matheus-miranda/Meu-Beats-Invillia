@@ -10,6 +10,7 @@
         android:id="@+id/iv_bg_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/login_bg_img_description"
         android:scaleType="center"
         android:src="@drawable/login_bg" />
 
@@ -23,14 +24,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="24dp" />
+        app:layout_constraintGuide_begin="@dimen/login_margin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="24dp" />
+        app:layout_constraintGuide_end="@dimen/login_margin" />
 
     <TextView
         android:id="@+id/tv_meu_beats"
@@ -58,7 +59,7 @@
         style="@style/TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="@dimen/login_margin"
         android:hint="@string/user"
         app:helperText="usuário cadastrado"
         app:helperTextTextColor="@color/teal_200"
@@ -80,7 +81,7 @@
         style="@style/TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="@dimen/login_margin"
         android:hint="@string/password"
         app:layout_constraintBottom_toTopOf="@id/btn_login"
         app:layout_constraintEnd_toEndOf="@id/guide_end"
@@ -101,7 +102,7 @@
         android:id="@+id/btn_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="@dimen/login_margin"
         android:background="@drawable/rounded_button"
         android:text="@string/login"
         android:textAllCaps="false"
@@ -127,12 +128,13 @@
         android:layout_marginStart="4dp"
         android:clickable="true"
         android:focusable="true"
+        android:gravity="center"
+        android:minHeight="@dimen/touch_view_min_height"
         android:text="@string/register"
         android:textColor="@color/login_link"
         app:layout_constraintBottom_toBottomOf="@id/tv_not_registered"
         app:layout_constraintEnd_toEndOf="@id/guide_end"
         app:layout_constraintStart_toEndOf="@+id/tv_not_registered"
         app:layout_constraintTop_toTopOf="@id/tv_not_registered" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
