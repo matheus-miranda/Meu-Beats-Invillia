@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="#121212"
+    android:padding="@dimen/layout_spacing_normal">
+
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="114dp"
+        android:layout_height="99dp"
+        android:contentDescription="@string/phone_image_descriptor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_phone_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_spacing_larger"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/chip_rating"
+        app:layout_constraintStart_toEndOf="@id/iv_photo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Fone Modelo 02" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:chipBackgroundColor="#121212"
+        app:chipIcon="@drawable/ic_star"
+        app:chipIconTint="#FFC120"
+        app:chipMinTouchTargetSize="0dp"
+        app:chipStartPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_phone_model"
+        app:layout_constraintTop_toBottomOf="@+id/tv_phone_model"
+        tools:text="4.6" />
+
+    <TextView
+        android:id="@+id/tv_number_reviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/chip_rating"
+        app:layout_constraintStart_toEndOf="@id/chip_rating"
+        tools:text="86 reviews" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple_300"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="R$ 99,50" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,4 +5,5 @@
     <dimen name="layout_spacing_larger">24dp</dimen>
     <dimen name="layout_spacing_normal">16dp</dimen>
     <dimen name="layout_spacing_double">32dp</dimen>
+    <dimen name="layout_spacing_half">8dp</dimen>
 </resources>
