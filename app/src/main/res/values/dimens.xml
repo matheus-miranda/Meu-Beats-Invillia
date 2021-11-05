@@ -2,5 +2,7 @@
 <resources>
     <dimen name="corner_radius">24dp</dimen>
     <dimen name="touch_view_min_height">48dp</dimen>
-    <dimen name="login_margin">24dp</dimen>
+    <dimen name="layout_spacing_larger">24dp</dimen>
+    <dimen name="layout_spacing_normal">16dp</dimen>
+    <dimen name="layout_spacing_double">32dp</dimen>
 </resources>

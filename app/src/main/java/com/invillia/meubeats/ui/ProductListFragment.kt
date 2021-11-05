@@ -5,33 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.invillia.meubeats.R
-import com.invillia.meubeats.databinding.FragmentLoginBinding
+import com.invillia.meubeats.databinding.FragmentProductListBinding
 
-class LoginFragment : Fragment() {
+class ProductListFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentProductListBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tilUser.isHelperTextEnabled = false
-        bindListeners()
+        bindToolbar()
     }
 
-    private fun bindListeners() {
-        binding.btnLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_productListFragment)
-        }
+    private fun bindToolbar() {
+        binding.tbProductList.inflateMenu(R.menu.menu_product_list)
     }
 
     override fun onDestroyView() {
