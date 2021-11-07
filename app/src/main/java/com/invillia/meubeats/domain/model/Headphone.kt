@@ -1,4 +1,4 @@
-package com.invillia.meubeats.domain
+package com.invillia.meubeats.domain.model
 
 data class Headphone(
     val model: String,
