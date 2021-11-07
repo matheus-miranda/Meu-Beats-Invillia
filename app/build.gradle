@@ -50,6 +50,10 @@ dependencies {
     // Koin
     implementation "io.insert-koin:koin-android:$koinVersion"
 
+    // Moshi
+    implementation "com.squareup.moshi:moshi:$moshiVersion"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+
     // Testing
     testImplementation "junit:junit:$junitVersion"
     testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
