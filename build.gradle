@@ -9,6 +9,7 @@ buildscript {
         reflectVersion = '1.5.31'
         lifecycleVersion = '2.4.0'
         timberVersion = '5.0.1'
+        glideVersion = '4.12.0'
         mockkVersion = '1.12.0'
         junitVersion = '4.13.2'
         testJunitVersion = '1.1.3'
