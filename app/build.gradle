@@ -62,6 +62,12 @@ dependencies {
     // Reflect
     implementation "org.jetbrains.kotlin:kotlin-reflect:$reflectVersion"
 
+    // Lifecycle scope
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
     // Testing
     testImplementation "junit:junit:$junitVersion"
     testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
