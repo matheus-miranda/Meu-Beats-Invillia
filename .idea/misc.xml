@@ -17,7 +17,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.37182971014492755" />
         <entry key="app/src/main/res/layout/fragment_product_list.xml" value="0.39492753623188404" />
-        <entry key="app/src/main/res/layout/product_list_item.xml" value="0.37726449275362317" />
+        <entry key="app/src/main/res/layout/product_list_item.xml" value="0.16" />
       </map>
     </option>
   </component>
@@ -26,5 +26,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.16" />
+      </ProjectState>
+    </option>
   </component>
 </project>

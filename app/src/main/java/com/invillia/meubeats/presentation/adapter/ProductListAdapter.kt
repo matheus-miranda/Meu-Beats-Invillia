@@ -16,11 +16,14 @@ class ProductListAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Headphone) {
+            val formattedPrice = "R$ ${item.price}"
+            val formattedReview = "${item.totalReviews} Reviews"
+
             binding.apply {
                 tvPhoneModel.text = item.model
                 chipRating.text = item.rating.toString()
-                tvNumberReviews.text = item.totalReviews.toString()
-                tvPrice.text = item.price.toString()
+                tvNumberReviews.text = formattedReview
+                tvPrice.text = formattedPrice
                 Glide.with(root.context).load(item.image).into(ivPhoto)
             }
         }
