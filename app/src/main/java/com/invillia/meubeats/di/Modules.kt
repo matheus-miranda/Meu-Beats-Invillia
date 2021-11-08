@@ -9,6 +9,8 @@ import com.invillia.meubeats.data.repositoryimpl.BeatsRepositoryImpl
 import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.domain.repository.BeatsRepository
 import com.invillia.meubeats.domain.usecase.GetNetworkHeadphonesUseCase
+import com.invillia.meubeats.presentation.viewmodel.ProductListViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 private val useCaseModule = module {
@@ -27,6 +29,10 @@ private val repositoryModule = module {
     factory<BeatsRepository> { BeatsRepositoryImpl(service = get(), mapper = get()) }
 }
 
+private val viewModelModule = module {
+    viewModel { ProductListViewModel(getNetworkHeadphonesUseCase = get()) }
+}
+
 object AppModules {
-    val modules = useCaseModule + networkModule + repositoryModule + mapperModule
+    val modules = useCaseModule + networkModule + repositoryModule + mapperModule + viewModelModule
 }
