@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.invillia.meubeats.databinding.ProductListItemBinding
 import com.invillia.meubeats.domain.model.Headphone
+import com.invillia.meubeats.presentation.extension.formatCurrency
+import java.util.*
 
 class ProductListAdapter :
     ListAdapter<Headphone, ProductListAdapter.ProductViewHolder>(DiffCallBack()) {
@@ -16,7 +18,7 @@ class ProductListAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Headphone) {
-            val formattedPrice = "R$ ${String.format("%.2f", item.price).replace(".", ",")}"
+            val formattedPrice = item.price.formatCurrency(Locale("pt", "BR"))
             val formattedReview = "${item.totalReviews} Reviews"
 
             binding.apply {
