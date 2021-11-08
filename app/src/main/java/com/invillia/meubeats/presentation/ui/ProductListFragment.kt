@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.invillia.meubeats.R
 import com.invillia.meubeats.databinding.FragmentProductListBinding
 import com.invillia.meubeats.domain.model.Headphone
+import com.invillia.meubeats.presentation.adapter.ProductListAdapter
 import com.invillia.meubeats.presentation.viewmodel.ProductListViewModel
 import com.invillia.meubeats.presentation.viewmodel.State
 import kotlinx.coroutines.flow.collect
@@ -23,6 +25,7 @@ class ProductListFragment : Fragment() {
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<ProductListViewModel>()
+    private val productAdapter by lazy { ProductListAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +40,9 @@ class ProductListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         bindObserver()
+        setupRecyclerView()
     }
+
 
     private fun bindToolbar() {
         binding.tbProductList.inflateMenu(R.menu.menu_product_list)
@@ -48,6 +53,14 @@ class ProductListFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect(::getHeadphones)
             }
+        }
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvProducts.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            adapter = productAdapter
         }
     }
 
@@ -73,7 +86,7 @@ class ProductListFragment : Fragment() {
     }
 
     private fun showSuccess(headphoneList: List<Headphone>) {
-        Timber.d("Success: $headphoneList")
+        productAdapter.submitList(headphoneList)
     }
 
     override fun onDestroyView() {
