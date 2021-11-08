@@ -13,12 +13,12 @@ import com.invillia.meubeats.R
 import com.invillia.meubeats.databinding.FragmentProductListBinding
 import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.presentation.adapter.ProductListAdapter
+import com.invillia.meubeats.presentation.extension.createDialog
 import com.invillia.meubeats.presentation.viewmodel.ProductListViewModel
 import com.invillia.meubeats.presentation.viewmodel.State
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class ProductListFragment : Fragment() {
 
@@ -26,6 +26,7 @@ class ProductListFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModel<ProductListViewModel>()
     private val productAdapter by lazy { ProductListAdapter() }
+    private val dialog by lazy { requireContext().createDialog() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +43,6 @@ class ProductListFragment : Fragment() {
         bindObserver()
         setupRecyclerView()
     }
-
 
     private fun bindToolbar() {
         binding.tbProductList.inflateMenu(R.menu.menu_product_list)
@@ -74,18 +74,36 @@ class ProductListFragment : Fragment() {
     }
 
     private fun showLoading() {
-        Timber.d("Loading")
+        dialog.dismiss()
+        binding.apply {
+            spinnerLoading.visibility = View.VISIBLE
+            tvEmptyList.visibility = View.GONE
+        }
     }
 
     private fun showError(throwable: Throwable) {
-        Timber.d("Error: ${throwable.message}")
+        binding.apply {
+            spinnerLoading.visibility = View.GONE
+            tvEmptyList.visibility = View.GONE
+        }
+        dialog.setMessage(throwable.message)
+        dialog.show()
     }
 
     private fun showEmptyList() {
-        Timber.d("Empty")
+        dialog.dismiss()
+        binding.apply {
+            spinnerLoading.visibility = View.GONE
+            tvEmptyList.visibility = View.VISIBLE
+        }
     }
 
     private fun showSuccess(headphoneList: List<Headphone>) {
+        dialog.dismiss()
+        binding.apply {
+            spinnerLoading.visibility = View.GONE
+            tvEmptyList.visibility = View.GONE
+        }
         productAdapter.submitList(headphoneList)
     }
 

@@ -16,7 +16,7 @@ class ProductListAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Headphone) {
-            val formattedPrice = "R$ ${item.price}"
+            val formattedPrice = "R$ ${String.format("%.2f", item.price).replace(".", ",")}"
             val formattedReview = "${item.totalReviews} Reviews"
 
             binding.apply {
@@ -27,7 +27,6 @@ class ProductListAdapter :
                 Glide.with(root.context).load(item.image).into(ivPhoto)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {

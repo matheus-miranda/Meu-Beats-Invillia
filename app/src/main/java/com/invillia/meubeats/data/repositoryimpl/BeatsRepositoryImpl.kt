@@ -24,8 +24,7 @@ class BeatsRepositoryImpl(
             val error = e.response()?.toString()
             throw RemoteException(error)
         } catch (i: IOException) {
-            val error = i.message
-            throw RemoteException(error)
+            throw RemoteException("Por favor cheque a sua conexão com a internet.")
         }
     }
 }

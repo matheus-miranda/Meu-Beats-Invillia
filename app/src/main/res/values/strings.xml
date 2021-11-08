@@ -13,4 +13,5 @@
     <string name="headphone_descriptor">Fone de ouvido</string>
     <string name="more_info">Mais Informações</string>
     <string name="phone_image_descriptor">Image do fone de ouvido</string>
+    <string name="empty_list_text">Não há modelos a serem visualizados</string>
 </resources>
