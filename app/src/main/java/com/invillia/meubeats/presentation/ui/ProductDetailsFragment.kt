@@ -10,7 +10,9 @@ import com.invillia.meubeats.databinding.FragmentProductDetailsBinding
 class ProductDetailsFragment : Fragment() {
 
     private var _binding: FragmentProductDetailsBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
+
+    private val args by lazy { ProductDetailsFragmentArgs.fromBundle(requireArguments()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -18,6 +20,11 @@ class ProductDetailsFragment : Fragment() {
     ): View {
         _binding = FragmentProductDetailsBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val receivedHeadphone = args.headphone
     }
 
     override fun onDestroyView() {

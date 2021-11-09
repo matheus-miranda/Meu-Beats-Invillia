@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Meu Beats</string>
-    <string name="especializados_em_fones_para_deejay">Especializados em fones para deejay</string>
+    <string name="especializados_em_fones_para_deejay">Especializados em fones para DJ\'s</string>
     <string name="user">Usuário</string>
     <string name="password">Senha</string>
     <string name="login">Entrar</string>
@@ -14,4 +14,11 @@
     <string name="more_info">Mais Informações</string>
     <string name="phone_image_descriptor">Image do fone de ouvido</string>
     <string name="empty_list_text">Não há modelos a serem visualizados</string>
+    <string name="connection">Conexão</string>
+    <string name="compatibility">Compatibilidade</string>
+    <string name="charge">Alimentação</string>
+    <string name="autonomy">Autonomia</string>
+    <string name="height">Altura</string>
+    <string name="capture">Captura</string>
+    <string name="buy">Comprar</string>
 </resources>
