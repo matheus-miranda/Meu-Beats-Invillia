@@ -26,12 +26,14 @@
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ActionBarTheme"
         app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="?attr/homeAsUpIndicator"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
 
     <ImageView
         android:id="@+id/iv_headphone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="230dp"
+        android:layout_marginHorizontal="54dp"
         android:contentDescription="@string/headphone_descriptor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +44,7 @@
         android:id="@+id/headphone_shadow"
         android:layout_width="0dp"
         android:layout_height="16dp"
+        android:layout_marginHorizontal="48dp"
         android:background="@drawable/headphone_shadow"
         app:layout_constraintEnd_toEndOf="@id/iv_headphone"
         app:layout_constraintStart_toStartOf="@id/iv_headphone"
@@ -51,6 +54,7 @@
         android:id="@+id/tv_model_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_spacing_double"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
