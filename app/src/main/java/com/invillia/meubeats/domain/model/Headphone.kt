@@ -1,5 +1,9 @@
 package com.invillia.meubeats.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Headphone(
     val model: String,
     val rating: Double,
@@ -12,4 +16,4 @@ data class Headphone(
     val autonomy: String,
     val height: String,
     val capture: String
-)
+) : Parcelable
