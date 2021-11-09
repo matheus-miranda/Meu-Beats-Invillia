@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.invillia.meubeats.R
 import com.invillia.meubeats.databinding.FragmentProductListBinding
@@ -87,7 +88,11 @@ class ProductListFragment : Fragment() {
 
     private fun navigateToDetailsScreen(headphone: Headphone?) {
         headphone?.let {
-            // TODO Navigate to details
+            this.findNavController().navigate(
+                ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(
+                    headphone = it
+                )
+            )
         }
         viewModel.doneNavigatingToProductDetails()
     }
