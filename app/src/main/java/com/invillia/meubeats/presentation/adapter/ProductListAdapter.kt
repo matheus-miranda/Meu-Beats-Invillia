@@ -11,10 +11,10 @@ import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.presentation.extension.formatCurrency
 import java.util.*
 
-class ProductListAdapter :
+class ProductListAdapter(private val clickHandler: ProductClickHandler) :
     ListAdapter<Headphone, ProductListAdapter.ProductViewHolder>(DiffCallBack()) {
 
-    inner class ProductViewHolder(private val binding: ProductListItemBinding) :
+    class ProductViewHolder(private val binding: ProductListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Headphone) {
@@ -37,7 +37,11 @@ class ProductListAdapter :
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val headphone = getItem(position)
+        holder.itemView.setOnClickListener {
+            clickHandler.onProductClick(headphone)
+        }
+        holder.bind(headphone)
     }
 }
 

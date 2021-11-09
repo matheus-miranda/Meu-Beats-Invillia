@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.invillia.meubeats.R
 import com.invillia.meubeats.databinding.FragmentProductListBinding
 import com.invillia.meubeats.domain.model.Headphone
+import com.invillia.meubeats.presentation.adapter.ProductClickHandler
 import com.invillia.meubeats.presentation.adapter.ProductListAdapter
 import com.invillia.meubeats.presentation.extension.createDialog
 import com.invillia.meubeats.presentation.viewmodel.ProductListViewModel
@@ -25,7 +27,11 @@ class ProductListFragment : Fragment() {
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<ProductListViewModel>()
-    private val productAdapter by lazy { ProductListAdapter() }
+    private val productAdapter by lazy {
+        ProductListAdapter(ProductClickHandler {
+            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+        })
+    }
     private val dialog by lazy { requireContext().createDialog() }
 
     override fun onCreateView(
