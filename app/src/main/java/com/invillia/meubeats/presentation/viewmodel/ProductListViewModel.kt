@@ -2,6 +2,7 @@ package com.invillia.meubeats.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.domain.usecase.GetNetworkHeadphonesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -12,6 +13,9 @@ class ProductListViewModel(private val getNetworkHeadphonesUseCase: GetNetworkHe
 
     private val _state = MutableStateFlow<State>(State.Loading)
     val state: StateFlow<State> = _state.asStateFlow()
+
+    private val _navigateToProductDetails = MutableStateFlow<Headphone?>(null)
+    val navigateToProductDetails: StateFlow<Headphone?> = _navigateToProductDetails.asStateFlow()
 
     init {
         getHeadphones()
@@ -33,5 +37,13 @@ class ProductListViewModel(private val getNetworkHeadphonesUseCase: GetNetworkHe
                     _state.value = State.Success(list)
                 }
             }
+    }
+
+    fun onProductClicked(headphone: Headphone) {
+        _navigateToProductDetails.value = headphone
+    }
+
+    fun doneNavigatingToProductDetails() {
+        _navigateToProductDetails.value = null
     }
 }

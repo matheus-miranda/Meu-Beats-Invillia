@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -26,10 +25,12 @@ class ProductListFragment : Fragment() {
 
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
+
     private val viewModel by viewModel<ProductListViewModel>()
+
     private val productAdapter by lazy {
-        ProductListAdapter(ProductClickHandler {
-            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+        ProductListAdapter(ProductClickHandler { headphone ->
+            viewModel.onProductClicked(headphone)
         })
     }
     private val dialog by lazy { requireContext().createDialog() }
@@ -46,7 +47,7 @@ class ProductListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
-        bindObserver()
+        bindCollectors()
         setupRecyclerView()
     }
 
@@ -54,10 +55,15 @@ class ProductListFragment : Fragment() {
         binding.tbProductList.inflateMenu(R.menu.menu_product_list)
     }
 
-    private fun bindObserver() {
+    private fun bindCollectors() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect(::getHeadphones)
+                launch {
+                    viewModel.state.collect(::getHeadphones)
+                }
+                launch {
+                    viewModel.navigateToProductDetails.collect(::navigateToDetailsScreen)
+                }
             }
         }
     }
@@ -77,6 +83,13 @@ class ProductListFragment : Fragment() {
             is State.EmptyList -> showEmptyList()
             is State.Success -> showSuccess(state.headphoneList)
         }
+    }
+
+    private fun navigateToDetailsScreen(headphone: Headphone?) {
+        headphone?.let {
+            // TODO Navigate to details
+        }
+        viewModel.doneNavigatingToProductDetails()
     }
 
     private fun showLoading() {
