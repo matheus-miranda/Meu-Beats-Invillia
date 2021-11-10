@@ -1,5 +1,6 @@
 package com.invillia.meubeats.data.repositoryimpl
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.invillia.meubeats.data.mapper.NetworkHeadphoneMapper
 import com.invillia.meubeats.data.remote.api.BeatsApi
@@ -7,10 +8,7 @@ import com.invillia.meubeats.util.CoroutineTestRule
 import com.invillia.meubeats.util.TestData.HEADPHONE
 import com.invillia.meubeats.util.TestData.NETWORK_HEADPHONE
 import com.invillia.meubeats.util.TestData.initMockkAnnotations
-import io.mockk.clearAllMocks
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.every
+import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,6 +21,9 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class BeatsRepositoryImplTest {
+
+    @get:Rule
+    val observerRule = InstantTaskExecutorRule()
 
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
@@ -51,6 +52,7 @@ class BeatsRepositoryImplTest {
         every { mapper.toDomainList(entityHeadphoneList) } returns listOf(HEADPHONE)
         val result = repositoryImpl.getNetworkHeadphones().first()
 
+        verify(exactly = 1) { mapper.toDomainList(entityHeadphoneList) }
         coVerify(exactly = 1) { service.getHeadphones() }
         assertThat(result).isEqualTo(expectedResult.first())
     }
