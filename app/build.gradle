@@ -72,12 +72,15 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
-    // Testing
+    // Unit Testing
     testImplementation "junit:junit:$junitVersion"
     testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
     testImplementation "io.mockk:mockk:$mockkVersion"
     testImplementation "io.insert-koin:koin-test-junit4:$koinVersion"
     testImplementation "com.google.truth:truth:$truthVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+    // Integration Testing
     androidTestImplementation "androidx.test.ext:junit:$testJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 }
