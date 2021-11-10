@@ -1,6 +1,7 @@
 package com.invillia.meubeats.util
 
 import com.invillia.meubeats.domain.model.Headphone
+import io.mockk.MockKAnnotations
 
 object TestData {
 
@@ -17,4 +18,8 @@ object TestData {
         height = "height",
         capture = "capture"
     )
+
+    fun Any.initMockkAnnotations() {
+        MockKAnnotations.init(this, relaxUnitFun = true)
+    }
 }
