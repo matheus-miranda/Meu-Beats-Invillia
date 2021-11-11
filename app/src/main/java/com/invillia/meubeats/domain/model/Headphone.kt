@@ -18,12 +18,6 @@ class Headphone(
     val capture: String
 ) : Parcelable {
 
-    override fun toString(): String {
-        return "Headphone(model='$model', rating=$rating, price=$price, totalReviews=$totalReviews, " +
-                "image='$image', connection='$connection', compatibility='$compatibility', " +
-                "charge='$charge', autonomy='$autonomy', height='$height', capture='$capture')"
-    }
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
