@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- product_list_item.xml -->
+    <style name="product_list_item_image">
+        <item name="android:layout_width">114dp</item>
+        <item name="android:layout_height">99dp</item>
+    </style>
+    <style name="product_list_item_price">
+        <item name="android:textColor">@color/purple_300</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

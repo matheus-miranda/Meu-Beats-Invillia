@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#121212"
+    android:background="@color/product_list_item_bg_color"
     android:padding="@dimen/layout_spacing_normal">
 
     <ImageView
         android:id="@+id/iv_photo"
-        android:layout_width="114dp"
-        android:layout_height="99dp"
+        style="@style/product_list_item_image"
         android:contentDescription="@string/phone_image_descriptor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,9 +33,9 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:textColor="@color/white"
-        app:chipBackgroundColor="#121212"
+        app:chipBackgroundColor="@color/product_list_item_bg_color"
         app:chipIcon="@drawable/ic_star"
-        app:chipIconTint="#FFC120"
+        app:chipIconTint="@color/product_list_item_star_color"
         app:chipMinTouchTargetSize="0dp"
         app:chipStartPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,11 +53,9 @@
 
     <TextView
         android:id="@+id/tv_price"
+        style="@style/product_list_item_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/purple_300"
-        android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
