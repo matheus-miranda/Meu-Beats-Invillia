@@ -21,4 +21,5 @@
     <string name="height">Altura</string>
     <string name="capture">Captura</string>
     <string name="buy">Comprar</string>
+    <string name="formatted_review">%d Reviews</string>
 </resources>
