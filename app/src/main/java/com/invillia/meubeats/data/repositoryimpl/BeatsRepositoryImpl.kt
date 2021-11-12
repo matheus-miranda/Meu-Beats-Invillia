@@ -1,6 +1,8 @@
 package com.invillia.meubeats.data.repositoryimpl
 
+import android.content.Context
 import android.os.RemoteException
+import com.invillia.meubeats.R
 import com.invillia.meubeats.data.mapper.EntityMapper
 import com.invillia.meubeats.data.remote.api.BeatsApi
 import com.invillia.meubeats.data.remote.dto.NetworkHeadphone
@@ -13,7 +15,8 @@ import java.io.IOException
 
 class BeatsRepositoryImpl(
     private val service: BeatsApi,
-    private val mapper: EntityMapper<NetworkHeadphone, Headphone>
+    private val mapper: EntityMapper<NetworkHeadphone, Headphone>,
+    private val context: Context
 ) : BeatsRepository {
 
     override fun getNetworkHeadphones(): Flow<List<Headphone>> = flow {
@@ -24,7 +27,7 @@ class BeatsRepositoryImpl(
             val error = e.response()?.toString()
             throw RemoteException(error)
         } catch (i: IOException) {
-            throw RemoteException("Por favor cheque a sua conexão com a internet.")
+            throw RemoteException(context.getString(R.string.network_connection_error))
         }
     }
 }

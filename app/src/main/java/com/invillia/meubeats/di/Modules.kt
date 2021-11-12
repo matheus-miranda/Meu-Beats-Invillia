@@ -10,6 +10,7 @@ import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.domain.repository.BeatsRepository
 import com.invillia.meubeats.domain.usecase.GetNetworkHeadphonesUseCase
 import com.invillia.meubeats.presentation.viewmodel.ProductListViewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -26,7 +27,13 @@ private val mapperModule = module {
 }
 
 private val repositoryModule = module {
-    factory<BeatsRepository> { BeatsRepositoryImpl(service = get(), mapper = get()) }
+    factory<BeatsRepository> {
+        BeatsRepositoryImpl(
+            service = get(),
+            mapper = get(),
+            context = androidContext()
+        )
+    }
 }
 
 private val viewModelModule = module {
