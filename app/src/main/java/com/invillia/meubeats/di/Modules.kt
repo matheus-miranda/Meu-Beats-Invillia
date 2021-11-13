@@ -9,6 +9,8 @@ import com.invillia.meubeats.data.repositoryimpl.BeatsRepositoryImpl
 import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.domain.repository.BeatsRepository
 import com.invillia.meubeats.domain.usecase.GetNetworkHeadphonesUseCase
+import com.invillia.meubeats.presentation.imagecaching.GlideImageCachingImpl
+import com.invillia.meubeats.presentation.imagecaching.ImageCaching
 import com.invillia.meubeats.presentation.viewmodel.ProductListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -36,10 +38,15 @@ private val repositoryModule = module {
     }
 }
 
+private val presentationModule = module {
+    factory<ImageCaching> { GlideImageCachingImpl() }
+}
+
 private val viewModelModule = module {
     viewModel { ProductListViewModel(getNetworkHeadphonesUseCase = get()) }
 }
 
 object AppModules {
-    val modules = useCaseModule + networkModule + repositoryModule + mapperModule + viewModelModule
+    val modules =
+        useCaseModule + networkModule + repositoryModule + mapperModule + presentationModule + viewModelModule
 }

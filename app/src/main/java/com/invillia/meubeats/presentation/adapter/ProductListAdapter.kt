@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.invillia.meubeats.R
 import com.invillia.meubeats.databinding.ProductListItemBinding
 import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.presentation.extension.formatCurrency
+import com.invillia.meubeats.presentation.imagecaching.ImageCaching
+import org.koin.java.KoinJavaComponent.inject
 import java.util.*
 
 class ProductListAdapter(private val clickHandler: ProductClickHandler) :
@@ -17,6 +17,8 @@ class ProductListAdapter(private val clickHandler: ProductClickHandler) :
 
     class ProductViewHolder(private val binding: ProductListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        private val imageCaching: ImageCaching by inject(ImageCaching::class.java)
 
         fun bind(item: Headphone) {
             val formattedPrice = item.price.formatCurrency(Locale("pt", "BR"))
@@ -27,7 +29,11 @@ class ProductListAdapter(private val clickHandler: ProductClickHandler) :
                 chipRating.text = item.rating.toString()
                 tvNumberReviews.text = formattedReview
                 tvPrice.text = formattedPrice
-                Glide.with(root.context).load(item.image).into(ivPhoto)
+                imageCaching.displayImage(
+                    context = root.context,
+                    url = item.image,
+                    target = ivPhoto
+                )
             }
         }
     }

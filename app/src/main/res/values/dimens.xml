@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- common -->
     <dimen name="corner_radius">24dp</dimen>
-    <dimen name="touch_view_min_height">48dp</dimen>
+    <dimen name="layout_spacing_largest">48dp</dimen>
+    <dimen name="layout_spacing_double">32dp</dimen>
     <dimen name="layout_spacing_larger">24dp</dimen>
     <dimen name="layout_spacing_normal">16dp</dimen>
-    <dimen name="layout_spacing_double">32dp</dimen>
     <dimen name="layout_spacing_half">8dp</dimen>
+    <dimen name="layout_spacing_smaller">4dp</dimen>
+
+    <!-- fragment_product_details.xml -->
+    <dimen name="headphone_image_margin_horizontal">54dp</dimen>
+    <dimen name="headphone_image_height">230dp</dimen>
+    <dimen name="headphone_shadow_height">16dp</dimen>
+    <dimen name="headphone_shadow_margin_horizontal">48dp</dimen>
+    <dimen name="model_name_text_size">45sp</dimen>
+    <dimen name="hr_height">2dp</dimen>
+
+    <!-- fragment_login.xml -->
+    <dimen name="login_title_margin_top">60dp</dimen>
+    <dimen name="login_title_text_size">45sp</dimen>
+    <dimen name="login_sub_title_text_size">14sp</dimen>
+    <dimen name="login_register_margin_bottom">64dp</dimen>
+
+    <!-- fragment_product_list.xml -->
+    <dimen name="rounded_button_height">52dp</dimen>
+    <dimen name="empty_list_text_size">24sp</dimen>
 </resources>
