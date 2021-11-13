@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.invillia.meubeats.databinding.FragmentProductDetailsBinding
+import com.invillia.meubeats.presentation.imagecaching.ImageCaching
+import org.koin.android.ext.android.inject
 
 class ProductDetailsFragment : Fragment() {
 
@@ -15,6 +16,7 @@ class ProductDetailsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args by lazy { ProductDetailsFragmentArgs.fromBundle(requireArguments()) }
+    private val imageCaching: ImageCaching by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +48,11 @@ class ProductDetailsFragment : Fragment() {
             tvAutonomy.text = receivedHeadphone.autonomy
             tvHeight.text = receivedHeadphone.height
             tvCapture.text = receivedHeadphone.capture
-            Glide.with(root.context).load(receivedHeadphone.image).into(ivHeadphone)
+            imageCaching.displayImage(
+                context = root.context,
+                url = receivedHeadphone.image,
+                target = ivHeadphone
+            )
         }
     }
 
