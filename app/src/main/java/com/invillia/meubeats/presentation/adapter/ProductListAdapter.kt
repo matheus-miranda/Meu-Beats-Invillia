@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.invillia.meubeats.R
 import com.invillia.meubeats.databinding.ProductListItemBinding
 import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.presentation.extension.formatCurrency
