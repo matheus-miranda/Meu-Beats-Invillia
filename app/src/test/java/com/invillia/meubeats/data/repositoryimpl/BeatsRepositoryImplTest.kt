@@ -1,5 +1,6 @@
 package com.invillia.meubeats.data.repositoryimpl
 
+import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.invillia.meubeats.data.mapper.NetworkHeadphoneMapper
@@ -11,6 +12,7 @@ import com.invillia.meubeats.util.TestData.initMockkAnnotations
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
+import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
@@ -18,6 +20,7 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.manipulation.Ordering
 
 @ExperimentalCoroutinesApi
 class BeatsRepositoryImplTest {
@@ -36,6 +39,9 @@ class BeatsRepositoryImplTest {
 
     @MockK
     private lateinit var mapper: NetworkHeadphoneMapper
+
+    @RelaxedMockK
+    private lateinit var context: Context
 
     @Before
     fun setUp() {

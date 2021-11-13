@@ -21,4 +21,8 @@
     <string name="height">Altura</string>
     <string name="capture">Captura</string>
     <string name="buy">Comprar</string>
+    <string name="formatted_review">%d Reviews</string>
+
+    <!-- errors -->
+    <string name="network_connection_error">Por favor, verifique sua conexão com a internet.</string>
 </resources>

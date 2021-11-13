@@ -22,7 +22,7 @@ class ProductListAdapter(private val clickHandler: ProductClickHandler) :
 
         fun bind(item: Headphone) {
             val formattedPrice = item.price.formatCurrency(Locale("pt", "BR"))
-            val formattedReview = "${item.totalReviews} Reviews"
+            val formattedReview = binding.root.context.getString(R.string.formatted_review, item.totalReviews)
 
             binding.apply {
                 tvPhoneModel.text = item.model
