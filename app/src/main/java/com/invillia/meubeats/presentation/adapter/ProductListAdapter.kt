@@ -60,3 +60,7 @@ class DiffCallBack : DiffUtil.ItemCallback<Headphone>() {
     override fun areContentsTheSame(oldItem: Headphone, newItem: Headphone) =
         oldItem == newItem
 }
+
+class ProductClickHandler(private val clickListener: (headphone: Headphone) -> Unit) {
+    fun onProductClick(item: Headphone) = clickListener(item)
+}
