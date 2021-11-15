@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import timber.log.Timber
 
 object RetrofitBuilder {
 
@@ -13,8 +14,9 @@ object RetrofitBuilder {
 
     private fun client(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor {
-            HttpLoggingInterceptor.Level.BODY
+            Timber.d("OkHttp: $it")
         }
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         return OkHttpClient.Builder()
             .addInterceptor(interceptor)
