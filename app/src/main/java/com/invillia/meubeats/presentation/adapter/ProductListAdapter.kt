@@ -13,7 +13,7 @@ import com.invillia.meubeats.presentation.imagecaching.ImageCaching
 import org.koin.java.KoinJavaComponent.inject
 import java.util.*
 
-class ProductListAdapter(private val clickHandler: ProductClickHandler) :
+class ProductListAdapter(private val clickHandler: (headphone: Headphone) -> Unit) :
     ListAdapter<Headphone, ProductListAdapter.ProductViewHolder>(DiffCallBack()) {
 
     class ProductViewHolder(private val binding: ProductListItemBinding) :
@@ -23,7 +23,8 @@ class ProductListAdapter(private val clickHandler: ProductClickHandler) :
 
         fun bind(item: Headphone) {
             val formattedPrice = item.price.formatCurrency(Locale("pt", "BR"))
-            val formattedReview = binding.root.context.getString(R.string.formatted_review, item.totalReviews)
+            val formattedReview =
+                binding.root.context.getString(R.string.formatted_review, item.totalReviews)
 
             binding.apply {
                 tvPhoneModel.text = item.model
@@ -47,7 +48,7 @@ class ProductListAdapter(private val clickHandler: ProductClickHandler) :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val headphone = getItem(position)
         holder.itemView.setOnClickListener {
-            clickHandler.onProductClick(headphone)
+            clickHandler(headphone)
         }
         holder.bind(headphone)
     }

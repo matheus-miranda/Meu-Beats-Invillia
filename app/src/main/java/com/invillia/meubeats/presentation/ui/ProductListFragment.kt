@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.invillia.meubeats.R
 import com.invillia.meubeats.databinding.FragmentProductListBinding
 import com.invillia.meubeats.domain.model.Headphone
-import com.invillia.meubeats.presentation.adapter.ProductClickHandler
 import com.invillia.meubeats.presentation.adapter.ProductListAdapter
 import com.invillia.meubeats.presentation.extension.createDialog
 import com.invillia.meubeats.presentation.util.EspressoIdlingResource
@@ -31,9 +30,9 @@ class ProductListFragment : Fragment() {
     private val viewModel by viewModel<ProductListViewModel>()
 
     private val productAdapter by lazy {
-        ProductListAdapter(ProductClickHandler { headphone ->
+        ProductListAdapter { headphone ->
             viewModel.onProductClicked(headphone)
-        })
+        }
     }
     private val dialog by lazy { requireContext().createDialog() }
 
