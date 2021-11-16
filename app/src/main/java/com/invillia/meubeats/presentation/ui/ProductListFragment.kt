@@ -16,6 +16,7 @@ import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.presentation.adapter.ProductClickHandler
 import com.invillia.meubeats.presentation.adapter.ProductListAdapter
 import com.invillia.meubeats.presentation.extension.createDialog
+import com.invillia.meubeats.presentation.util.EspressoIdlingResource
 import com.invillia.meubeats.presentation.viewmodel.ProductListViewModel
 import com.invillia.meubeats.presentation.viewmodel.State
 import kotlinx.coroutines.flow.collect
@@ -98,6 +99,7 @@ class ProductListFragment : Fragment() {
     }
 
     private fun showLoading() {
+        EspressoIdlingResource.increment()
         dialog.dismiss()
         binding.apply {
             spinnerLoading.visibility = View.VISIBLE
@@ -129,6 +131,7 @@ class ProductListFragment : Fragment() {
             tvEmptyList.visibility = View.GONE
         }
         productAdapter.submitList(headphoneList)
+        EspressoIdlingResource.decrement()
     }
 
     override fun onDestroyView() {
