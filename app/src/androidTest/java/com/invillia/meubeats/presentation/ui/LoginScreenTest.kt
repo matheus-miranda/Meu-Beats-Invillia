@@ -1,4 +1,4 @@
-package com.invillia.meubeats
+package com.invillia.meubeats.presentation.ui
 
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.Navigation
@@ -8,7 +8,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import com.google.common.truth.Truth.assertThat
-import com.invillia.meubeats.presentation.ui.LoginFragment
+import com.invillia.meubeats.R
 import org.junit.Test
 
 class LoginScreenTest {

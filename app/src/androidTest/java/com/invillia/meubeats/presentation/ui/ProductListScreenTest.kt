@@ -10,16 +10,24 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.filters.LargeTest
 import com.google.common.truth.Truth.assertThat
 import com.invillia.meubeats.R
 import com.invillia.meubeats.presentation.util.EspressoIdlingResource
+import org.hamcrest.Matchers.allOf
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
+@LargeTest
 class ProductListScreenTest {
+
+    @Rule
+    @JvmField
+    var activityTestRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Before
     fun registerIdlingResource() {
@@ -29,6 +37,27 @@ class ProductListScreenTest {
     @After
     fun unregisterIdlingResource() {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+    }
+
+    @Test
+    fun should_NavigateToProductListAndDisplayFirstRvItem() {
+        val loginButton = onView(
+            allOf(
+                withId(R.id.btn_login),
+                withText("Entrar"),
+                isDisplayed()
+            )
+        ).perform(click())
+
+        val modelName = onView(
+            allOf(
+                withId(R.id.tv_phone_model), withText("Modelo 01"),
+                withParent(withParent(withId(R.id.rv_products))),
+                isDisplayed()
+            )
+        )
+
+        modelName.check(matches(withText("Modelo 01")))
     }
 
     @Test
