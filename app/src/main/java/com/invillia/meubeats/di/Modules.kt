@@ -1,5 +1,6 @@
 package com.invillia.meubeats.di
 
+import com.invillia.meubeats.data.local.BeatsDatabase
 import com.invillia.meubeats.data.mapper.EntityMapper
 import com.invillia.meubeats.data.mapper.NetworkHeadphoneMapper
 import com.invillia.meubeats.data.remote.api.BeatsApi
@@ -12,6 +13,7 @@ import com.invillia.meubeats.domain.usecase.GetNetworkHeadphonesUseCase
 import com.invillia.meubeats.presentation.imagecaching.GlideImageCachingImpl
 import com.invillia.meubeats.presentation.imagecaching.ImageCaching
 import com.invillia.meubeats.presentation.viewmodel.ProductListViewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -20,8 +22,9 @@ private val useCaseModule = module {
     factory { GetNetworkHeadphonesUseCase(repository = get()) }
 }
 
-private val networkModule = module {
+private val dataModule = module {
     single { RetrofitBuilder.createService().create(BeatsApi::class.java) }
+    single { BeatsDatabase.getInstance(context = androidApplication()) }
 }
 
 private val mapperModule = module {
@@ -48,5 +51,5 @@ private val viewModelModule = module {
 
 object AppModules {
     val modules =
-        useCaseModule + networkModule + repositoryModule + mapperModule + presentationModule + viewModelModule
+        useCaseModule + dataModule + repositoryModule + mapperModule + presentationModule + viewModelModule
 }
