@@ -5,9 +5,9 @@ import com.invillia.meubeats.util.TestData.ENTITY_HEADPHONE
 import com.invillia.meubeats.util.TestData.HEADPHONE
 import org.junit.Test
 
-class HeadphoneEntityMapperTest {
+class HeadphoneEntityMapperImplTest {
 
-    private val mapper = HeadphoneEntityMapper()
+    private val mapper = HeadphoneEntityMapperImpl()
 
     @Test
     fun toDomain() {

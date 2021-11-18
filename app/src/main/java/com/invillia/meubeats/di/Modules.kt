@@ -1,8 +1,11 @@
 package com.invillia.meubeats.di
 
 import com.invillia.meubeats.data.local.BeatsDatabase
-import com.invillia.meubeats.data.mapper.EntityMapper
+import com.invillia.meubeats.data.local.entity.HeadphoneEntity
+import com.invillia.meubeats.data.mapper.HeadphoneEntityMapper
+import com.invillia.meubeats.data.mapper.HeadphoneEntityMapperImpl
 import com.invillia.meubeats.data.mapper.NetworkHeadphoneMapper
+import com.invillia.meubeats.data.mapper.NetworkHeadphoneMapperImpl
 import com.invillia.meubeats.data.remote.api.BeatsApi
 import com.invillia.meubeats.data.remote.api.RetrofitBuilder
 import com.invillia.meubeats.data.remote.dto.NetworkHeadphone
@@ -28,7 +31,8 @@ private val dataModule = module {
 }
 
 private val mapperModule = module {
-    factory<EntityMapper<NetworkHeadphone, Headphone>> { NetworkHeadphoneMapper() }
+    factory<NetworkHeadphoneMapper<NetworkHeadphone, Headphone>> { NetworkHeadphoneMapperImpl() }
+    factory<HeadphoneEntityMapper<HeadphoneEntity, Headphone>> { HeadphoneEntityMapperImpl() }
 }
 
 private val repositoryModule = module {

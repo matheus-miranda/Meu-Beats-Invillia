@@ -3,7 +3,7 @@ package com.invillia.meubeats.data.repositoryimpl
 import android.content.Context
 import android.os.RemoteException
 import com.invillia.meubeats.R
-import com.invillia.meubeats.data.mapper.EntityMapper
+import com.invillia.meubeats.data.mapper.NetworkHeadphoneMapper
 import com.invillia.meubeats.data.remote.api.BeatsApi
 import com.invillia.meubeats.data.remote.dto.NetworkHeadphone
 import com.invillia.meubeats.domain.model.Headphone
@@ -15,7 +15,7 @@ import java.io.IOException
 
 class BeatsRepositoryImpl(
     private val service: BeatsApi,
-    private val mapper: EntityMapper<NetworkHeadphone, Headphone>,
+    private val mapper: NetworkHeadphoneMapper<NetworkHeadphone, Headphone>,
     private val context: Context
 ) : BeatsRepository {
 

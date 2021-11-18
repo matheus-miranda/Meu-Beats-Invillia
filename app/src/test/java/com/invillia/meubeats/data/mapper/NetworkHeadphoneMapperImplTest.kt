@@ -5,9 +5,9 @@ import com.invillia.meubeats.util.TestData.HEADPHONE
 import com.invillia.meubeats.util.TestData.NETWORK_HEADPHONE
 import org.junit.Test
 
-class NetworkHeadphoneMapperTest {
+class NetworkHeadphoneMapperImplTest {
 
-    private val mapper = NetworkHeadphoneMapper()
+    private val mapper = NetworkHeadphoneMapperImpl()
 
     @Test
     fun toDomain() {

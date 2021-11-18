@@ -3,7 +3,7 @@ package com.invillia.meubeats.data.repositoryimpl
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
-import com.invillia.meubeats.data.mapper.NetworkHeadphoneMapper
+import com.invillia.meubeats.data.mapper.NetworkHeadphoneMapperImpl
 import com.invillia.meubeats.data.remote.api.BeatsApi
 import com.invillia.meubeats.util.CoroutineTestRule
 import com.invillia.meubeats.util.TestData.HEADPHONE
@@ -20,7 +20,6 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.manipulation.Ordering
 
 @ExperimentalCoroutinesApi
 class BeatsRepositoryImplTest {
@@ -38,7 +37,7 @@ class BeatsRepositoryImplTest {
     private lateinit var service: BeatsApi
 
     @MockK
-    private lateinit var mapper: NetworkHeadphoneMapper
+    private lateinit var mapper: NetworkHeadphoneMapperImpl
 
     @RelaxedMockK
     private lateinit var context: Context
