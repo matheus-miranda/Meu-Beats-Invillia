@@ -39,7 +39,9 @@ private val repositoryModule = module {
     factory<BeatsRepository> {
         BeatsRepositoryImpl(
             service = get(),
-            mapper = get(),
+            db = get(),
+            networkMapper = get(),
+            dbMapper = get(),
             context = androidContext()
         )
     }
