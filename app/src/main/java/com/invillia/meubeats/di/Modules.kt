@@ -54,7 +54,12 @@ private val presentationModule = module {
 }
 
 private val viewModelModule = module {
-    viewModel { ProductListViewModel(getNetworkHeadphonesUseCase = get()) }
+    viewModel {
+        ProductListViewModel(
+            getNetworkHeadphonesUseCase = get(),
+            getHeadphonesUseCase = get()
+        )
+    }
 }
 
 object AppModules {
