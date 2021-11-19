@@ -12,6 +12,7 @@ import com.invillia.meubeats.data.remote.dto.NetworkHeadphone
 import com.invillia.meubeats.data.repositoryimpl.BeatsRepositoryImpl
 import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.domain.repository.BeatsRepository
+import com.invillia.meubeats.domain.usecase.GetHeadphonesUseCase
 import com.invillia.meubeats.domain.usecase.GetNetworkHeadphonesUseCase
 import com.invillia.meubeats.presentation.imagecaching.GlideImageCachingImpl
 import com.invillia.meubeats.presentation.imagecaching.ImageCaching
@@ -23,6 +24,7 @@ import org.koin.dsl.module
 
 private val useCaseModule = module {
     factory { GetNetworkHeadphonesUseCase(repository = get()) }
+    factory { GetHeadphonesUseCase(repository = get()) }
 }
 
 private val dataModule = module {
