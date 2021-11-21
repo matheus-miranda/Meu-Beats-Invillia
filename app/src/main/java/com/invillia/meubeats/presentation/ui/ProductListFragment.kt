@@ -59,9 +59,6 @@ class ProductListFragment : Fragment() {
     private fun bindCollectors() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                launch {
-//                    viewModel.state.collect(::getNetworkHeadphones)
-//                }
                 launch {
                     viewModel.headphoneState.collect(::getHeadphones)
                 }
@@ -79,15 +76,6 @@ class ProductListFragment : Fragment() {
             adapter = productAdapter
         }
     }
-
-/*    private fun getNetworkHeadphones(state: State) {
-        when (state) {
-            is State.Loading -> showLoading()
-            is State.Error -> showError(state.throwable)
-            is State.EmptyList -> showEmptyList()
-            is State.Success -> showSuccess(state.headphoneList)
-        }
-    }*/
 
     private fun getHeadphones(uiState: UiState) {
         when (uiState) {

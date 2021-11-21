@@ -1,8 +1,5 @@
 package com.invillia.meubeats.data.repositoryimpl
 
-import android.content.Context
-import android.os.RemoteException
-import com.invillia.meubeats.R
 import com.invillia.meubeats.core.Resource
 import com.invillia.meubeats.data.local.BeatsDatabase
 import com.invillia.meubeats.data.local.entity.HeadphoneEntity
@@ -22,8 +19,7 @@ class BeatsRepositoryImpl(
     private val service: BeatsApi,
     db: BeatsDatabase,
     private val networkMapper: NetworkHeadphoneMapper<NetworkHeadphone, Headphone>,
-    private val dbMapper: HeadphoneEntityMapper<HeadphoneEntity, Headphone>,
-    private val context: Context
+    private val dbMapper: HeadphoneEntityMapper<HeadphoneEntity, Headphone>
 ) : BeatsRepository {
 
     private val headphoneDao = db.headphoneDao
@@ -49,18 +45,6 @@ class BeatsRepositoryImpl(
         // New data in DB
         val refreshedCache = dbMapper.toDomainList(headphoneDao.getAll())
         emit(Resource.Success(data = refreshedCache))
-    }
-
-    override fun getNetworkHeadphones(): Flow<List<Headphone>> = flow {
-        try {
-            val headphoneList = networkMapper.toDomainList(service.getHeadphones())
-            emit(headphoneList)
-        } catch (e: HttpException) {
-            val error = e.response()?.toString()
-            throw RemoteException(error)
-        } catch (i: IOException) {
-            throw RemoteException(context.getString(R.string.network_connection_error))
-        }
     }
 
     override suspend fun saveToDb(headphones: Array<Headphone>) {

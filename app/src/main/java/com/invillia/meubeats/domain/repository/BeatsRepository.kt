@@ -7,7 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface BeatsRepository {
     fun getHeadphones(): Flow<Resource<List<Headphone>>>
 
-    fun getNetworkHeadphones(): Flow<List<Headphone>>
-
     suspend fun saveToDb(headphones: Array<Headphone>)
 }

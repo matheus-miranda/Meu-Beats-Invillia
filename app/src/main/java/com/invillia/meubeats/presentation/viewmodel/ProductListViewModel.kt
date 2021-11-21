@@ -5,18 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.invillia.meubeats.core.Resource
 import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.domain.usecase.GetHeadphonesUseCase
-import com.invillia.meubeats.domain.usecase.GetNetworkHeadphonesUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class ProductListViewModel(
-    private val getNetworkHeadphonesUseCase: GetNetworkHeadphonesUseCase,
     private val getHeadphonesUseCase: GetHeadphonesUseCase
 ) :
     ViewModel() {
-
-    /*private val _state = MutableStateFlow<State>(State.Loading)
-    val state: StateFlow<State> = _state.asStateFlow()*/
 
     private val _headphoneState = MutableStateFlow<UiState>(UiState.Loading())
     val headphoneState: StateFlow<UiState> = _headphoneState.asStateFlow()
@@ -25,45 +20,8 @@ class ProductListViewModel(
     val navigateToProductDetails: StateFlow<Headphone?> = _navigateToProductDetails.asStateFlow()
 
     init {
-        //getNetworkHeadphones()
         getHeadphones()
     }
-
-    /*private fun getNetworkHeadphones() = viewModelScope.launch {
-        getNetworkHeadphonesUseCase()
-            .flowOn(Dispatchers.Main)
-            .onStart {
-                _state.value = State.Loading
-            }
-            .catch { error ->
-                _state.value = State.Error(error)
-            }
-            .collect { list ->
-                if (list.isEmpty()) {
-                    _state.value = State.EmptyList
-                } else {
-                    _state.value = State.Success(list)
-                }
-            }
-    }*/
-
-    /*private fun getHeadphones() = viewModelScope.launch {
-        getHeadphonesUseCase()
-            .flowOn(Dispatchers.Main)
-            .onStart {
-                _headphoneState.value = UiState.Loading()
-            }
-            .catch {
-                _headphoneState.value = UiState.Error()
-            }
-            .collect { list ->
-                Timber.e(list.toString())
-                _headphoneState.value = UiState.Success(list.data ?: emptyList())
-                if (list.data.isNullOrEmpty()) {
-                    _headphoneState.value = UiState.EmptyList
-                }
-            }
-    }*/
 
     private fun getHeadphones() = viewModelScope.launch {
         getHeadphonesUseCase()
@@ -77,7 +35,11 @@ class ProductListViewModel(
                             UiState.Error(list = result.data, error = result.message)
                     }
                     is Resource.Success -> {
-                        _headphoneState.value = UiState.Success(list = result.data)
+                        _headphoneState.value = if (result.data.isNullOrEmpty()) {
+                            UiState.EmptyList
+                        } else {
+                            UiState.Success(list = result.data)
+                        }
                     }
                 }
             }.launchIn(this)
