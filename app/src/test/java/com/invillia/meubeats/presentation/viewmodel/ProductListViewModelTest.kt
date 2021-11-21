@@ -2,7 +2,7 @@ package com.invillia.meubeats.presentation.viewmodel
 
 import com.google.common.truth.Truth.assertThat
 import com.invillia.meubeats.domain.model.Headphone
-import com.invillia.meubeats.domain.usecase.GetNetworkHeadphonesUseCase
+import com.invillia.meubeats.domain.usecase.GetHeadphonesUseCase
 import com.invillia.meubeats.util.CoroutineTestRule
 import com.invillia.meubeats.util.TestData.HEADPHONE
 import com.invillia.meubeats.util.TestData.initMockkAnnotations
@@ -23,7 +23,7 @@ class ProductListViewModelTest {
     private lateinit var viewModel: ProductListViewModel
 
     @RelaxedMockK
-    private lateinit var getNetworkHeadphones: GetNetworkHeadphonesUseCase
+    private lateinit var getHeadphones: GetHeadphonesUseCase
 
     @Before
     fun setUp() = initMockkAnnotations()
