@@ -17,7 +17,7 @@ import com.invillia.meubeats.presentation.adapter.ProductListAdapter
 import com.invillia.meubeats.presentation.extension.createDialog
 import com.invillia.meubeats.presentation.util.EspressoIdlingResource
 import com.invillia.meubeats.presentation.viewmodel.ProductListViewModel
-import com.invillia.meubeats.presentation.viewmodel.State
+import com.invillia.meubeats.presentation.viewmodel.UiState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -59,8 +59,11 @@ class ProductListFragment : Fragment() {
     private fun bindCollectors() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                launch {
+//                    viewModel.state.collect(::getNetworkHeadphones)
+//                }
                 launch {
-                    viewModel.state.collect(::getHeadphones)
+                    viewModel.headphoneState.collect(::getHeadphones)
                 }
                 launch {
                     viewModel.navigateToProductDetails.collect(::navigateToDetailsScreen)
@@ -77,12 +80,21 @@ class ProductListFragment : Fragment() {
         }
     }
 
-    private fun getHeadphones(state: State) {
+/*    private fun getNetworkHeadphones(state: State) {
         when (state) {
             is State.Loading -> showLoading()
             is State.Error -> showError(state.throwable)
             is State.EmptyList -> showEmptyList()
             is State.Success -> showSuccess(state.headphoneList)
+        }
+    }*/
+
+    private fun getHeadphones(uiState: UiState) {
+        when (uiState) {
+            is UiState.EmptyList -> showEmptyList()
+            is UiState.Loading -> showLoading(uiState.list)
+            is UiState.Error -> showError(uiState.list, uiState.error)
+            is UiState.Success -> showSuccess(uiState.list)
         }
     }
 
@@ -97,22 +109,26 @@ class ProductListFragment : Fragment() {
         viewModel.doneNavigatingToProductDetails()
     }
 
-    private fun showLoading() {
+    private fun showLoading(list: List<Headphone>?) {
         EspressoIdlingResource.increment()
         dialog.dismiss()
         binding.apply {
             spinnerLoading.visibility = View.VISIBLE
             tvEmptyList.visibility = View.GONE
         }
+        productAdapter.submitList(list)
+        EspressoIdlingResource.decrement()
     }
 
-    private fun showError(throwable: Throwable) {
+    private fun showError(list: List<Headphone>?, error: String?) {
         binding.apply {
             spinnerLoading.visibility = View.GONE
             tvEmptyList.visibility = View.GONE
         }
-        dialog.setMessage(throwable.message)
+        dialog.setMessage(error)
         dialog.show()
+        productAdapter.submitList(list)
+        EspressoIdlingResource.decrement()
     }
 
     private fun showEmptyList() {
@@ -123,7 +139,7 @@ class ProductListFragment : Fragment() {
         }
     }
 
-    private fun showSuccess(headphoneList: List<Headphone>) {
+    private fun showSuccess(headphoneList: List<Headphone>?) {
         dialog.dismiss()
         binding.apply {
             spinnerLoading.visibility = View.GONE
