@@ -1,4 +1,4 @@
-package com.invillia.meubeats.presentation.viewmodel
+package com.invillia.meubeats.presentation.util
 
 import com.invillia.meubeats.domain.model.Headphone
 

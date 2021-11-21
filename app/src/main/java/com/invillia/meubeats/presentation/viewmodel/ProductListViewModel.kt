@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.invillia.meubeats.core.Resource
 import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.domain.usecase.GetHeadphonesUseCase
+import com.invillia.meubeats.presentation.util.UiState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

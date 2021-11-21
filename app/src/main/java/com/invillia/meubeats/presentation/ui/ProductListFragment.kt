@@ -16,8 +16,8 @@ import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.presentation.adapter.ProductListAdapter
 import com.invillia.meubeats.presentation.extension.createDialog
 import com.invillia.meubeats.presentation.util.EspressoIdlingResource
+import com.invillia.meubeats.presentation.util.UiState
 import com.invillia.meubeats.presentation.viewmodel.ProductListViewModel
-import com.invillia.meubeats.presentation.viewmodel.UiState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
