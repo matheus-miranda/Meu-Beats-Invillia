@@ -1,6 +1,6 @@
 package com.invillia.meubeats.data.mapper
 
-interface EntityMapper<Entity, DomainModel> {
+interface HeadphoneEntityMapper<Entity, DomainModel> {
 
     fun toDomain(entity: Entity): DomainModel
 

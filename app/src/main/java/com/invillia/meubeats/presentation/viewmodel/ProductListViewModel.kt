@@ -2,17 +2,20 @@ package com.invillia.meubeats.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.invillia.meubeats.core.Resource
 import com.invillia.meubeats.domain.model.Headphone
-import com.invillia.meubeats.domain.usecase.GetNetworkHeadphonesUseCase
-import kotlinx.coroutines.Dispatchers
+import com.invillia.meubeats.domain.usecase.GetHeadphonesUseCase
+import com.invillia.meubeats.presentation.util.UiState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class ProductListViewModel(private val getNetworkHeadphonesUseCase: GetNetworkHeadphonesUseCase) :
+class ProductListViewModel(
+    private val getHeadphonesUseCase: GetHeadphonesUseCase
+) :
     ViewModel() {
 
-    private val _state = MutableStateFlow<State>(State.Loading)
-    val state: StateFlow<State> = _state.asStateFlow()
+    private val _headphoneState = MutableStateFlow<UiState>(UiState.Loading())
+    val headphoneState: StateFlow<UiState> = _headphoneState.asStateFlow()
 
     private val _navigateToProductDetails = MutableStateFlow<Headphone?>(null)
     val navigateToProductDetails: StateFlow<Headphone?> = _navigateToProductDetails.asStateFlow()
@@ -22,21 +25,25 @@ class ProductListViewModel(private val getNetworkHeadphonesUseCase: GetNetworkHe
     }
 
     private fun getHeadphones() = viewModelScope.launch {
-        getNetworkHeadphonesUseCase()
-            .flowOn(Dispatchers.Main)
-            .onStart {
-                _state.value = State.Loading
-            }
-            .catch { error ->
-                _state.value = State.Error(error)
-            }
-            .collect { list ->
-                if (list.isEmpty()) {
-                    _state.value = State.EmptyList
-                } else {
-                    _state.value = State.Success(list)
+        getHeadphonesUseCase()
+            .onEach { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        _headphoneState.value = UiState.Loading(list = result.data)
+                    }
+                    is Resource.Error -> {
+                        _headphoneState.value =
+                            UiState.Error(list = result.data, error = result.message)
+                    }
+                    is Resource.Success -> {
+                        _headphoneState.value = if (result.data.isNullOrEmpty()) {
+                            UiState.EmptyList
+                        } else {
+                            UiState.Success(list = result.data)
+                        }
+                    }
                 }
-            }
+            }.launchIn(this)
     }
 
     fun onProductClicked(headphone: Headphone) {
