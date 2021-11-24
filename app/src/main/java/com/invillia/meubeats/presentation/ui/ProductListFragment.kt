@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -54,6 +57,27 @@ class ProductListFragment : Fragment() {
 
     private fun bindToolbar() {
         binding.tbProductList.inflateMenu(R.menu.menu_product_list)
+        searchViewClickListener()
+    }
+
+    private fun searchViewClickListener(): Boolean {
+        binding.tbProductList.setOnMenuItemClickListener(Toolbar.OnMenuItemClickListener {
+            val searchView = it.actionView as SearchView
+            searchView.setOnQueryTextListener(object :
+                SearchView.OnQueryTextListener {
+
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    Toast.makeText(context, query ?: "", Toast.LENGTH_SHORT).show()
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return true
+                }
+            })
+            return@OnMenuItemClickListener false
+        })
+        return false
     }
 
     private fun bindCollectors() {
