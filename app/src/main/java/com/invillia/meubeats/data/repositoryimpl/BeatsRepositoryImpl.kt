@@ -50,4 +50,9 @@ class BeatsRepositoryImpl(
     override suspend fun saveToDb(headphones: Array<Headphone>) {
         headphoneDao.insert(*headphones.asEntity())
     }
+
+    override fun searchDatabase(searchQuery: String): Flow<List<Headphone>> = flow {
+        val searchList = dbMapper.toDomainList(headphoneDao.searchDatabase(searchQuery))
+        emit(searchList)
+    }
 }

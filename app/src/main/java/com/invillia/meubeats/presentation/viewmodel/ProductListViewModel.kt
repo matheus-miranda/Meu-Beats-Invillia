@@ -5,12 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.invillia.meubeats.core.Resource
 import com.invillia.meubeats.domain.model.Headphone
 import com.invillia.meubeats.domain.usecase.GetHeadphonesUseCase
+import com.invillia.meubeats.domain.usecase.SearchDatabaseUseCase
 import com.invillia.meubeats.presentation.util.UiState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class ProductListViewModel(
-    private val getHeadphonesUseCase: GetHeadphonesUseCase
+    private val getHeadphonesUseCase: GetHeadphonesUseCase,
+    private val searchDatabaseUseCase: SearchDatabaseUseCase
 ) :
     ViewModel() {
 
@@ -19,6 +21,9 @@ class ProductListViewModel(
 
     private val _navigateToProductDetails = MutableStateFlow<Headphone?>(null)
     val navigateToProductDetails: StateFlow<Headphone?> = _navigateToProductDetails.asStateFlow()
+
+    private val _searchListQuery = MutableStateFlow<List<Headphone>?>(null)
+    val searchListQuery: StateFlow<List<Headphone>?> = _searchListQuery.asStateFlow()
 
     init {
         getHeadphones()
@@ -52,5 +57,11 @@ class ProductListViewModel(
 
     fun doneNavigatingToProductDetails() {
         _navigateToProductDetails.value = null
+    }
+
+    fun searchDatabase(searchQuery: String) = viewModelScope.launch {
+       searchDatabaseUseCase(searchQuery).collect { list ->
+           _searchListQuery.value = list
+       }
     }
 }

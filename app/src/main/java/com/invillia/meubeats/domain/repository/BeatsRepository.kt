@@ -8,4 +8,6 @@ interface BeatsRepository {
     fun getHeadphones(): Flow<Resource<List<Headphone>>>
 
     suspend fun saveToDb(headphones: Array<Headphone>)
+
+    fun searchDatabase(searchQuery: String): Flow<List<Headphone>>
 }

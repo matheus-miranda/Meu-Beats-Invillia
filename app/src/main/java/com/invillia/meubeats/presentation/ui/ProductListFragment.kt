@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -38,6 +37,7 @@ class ProductListFragment : Fragment() {
         }
     }
     private val dialog by lazy { requireContext().createDialog() }
+    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,23 +61,41 @@ class ProductListFragment : Fragment() {
     }
 
     private fun searchViewClickListener(): Boolean {
-        binding.tbProductList.setOnMenuItemClickListener(Toolbar.OnMenuItemClickListener {
-            val searchView = it.actionView as SearchView
+        binding.tbProductList.setOnMenuItemClickListener(Toolbar.OnMenuItemClickListener { menuItem ->
+            searchView = menuItem.actionView as SearchView
+
             searchView.setOnQueryTextListener(object :
                 SearchView.OnQueryTextListener {
 
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    Toast.makeText(context, query ?: "", Toast.LENGTH_SHORT).show()
+                    menuItem.collapseActionView()
                     return true
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
+                    newText?.let { query ->
+                        searchDatabase(query)
+                    }
                     return true
                 }
             })
             return@OnMenuItemClickListener false
         })
         return false
+    }
+
+    private fun searchDatabase(query: String) {
+        val searchQuery = "%$query%"
+        viewModel.searchDatabase(searchQuery)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.searchListQuery.collect(::displaySearchResults)
+        }
+    }
+
+    private fun displaySearchResults(list: List<Headphone>?) {
+        list?.let {
+            productAdapter.submitList(it)
+        }
     }
 
     private fun bindCollectors() {

@@ -19,4 +19,7 @@ interface HeadphoneDao {
         deleteAll()
         insert(*headphones)
     }
+
+    @Query("SELECT * FROM Headphones WHERE Model LIKE :searchQuery")
+    suspend fun searchDatabase(searchQuery: String): List<HeadphoneEntity>
 }
